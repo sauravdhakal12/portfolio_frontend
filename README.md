@@ -14,5 +14,5 @@ Simple webapp, allow user to input ticker symbol, price and quantity of stocks. 
 - Daily portfolio profit/lose summary.
 - Style (red, green) & Notification banner
 
-**When will the project be complete? ** <br>
+**When will the project be complete?** <br>
 Completed MVP features and style added.
