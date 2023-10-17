@@ -1,10 +1,6 @@
 import { useState } from "react";
-
-const StockInfo = ({stock}) => {
-  return (
-    <li key={stock.id}>{stock.name}</li>
-  )
-}
+import InputField from "./components/input_field"
+import RenderStock from "./components/render_stock"
 
 const App = () => {
   const [stockTickerSymbol, setStockTickerSymbol] = useState("");
@@ -31,92 +27,27 @@ const App = () => {
     }
   ]);
 
-  // Allow input field to be updated
-  const handleStockTickerSymbol = (event) => {
-    setStockTickerSymbol(event.target.value);
-  }
-
-  const handleStockQuantity = (event) => {
-    setStockQuantity(event.target.value);
-  }
-
-  const handleStockPrice = (event) => {
-    setStockPrice(event.target.value);
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const ts = event.target[0].value;
-    const qt = event.target[1].value;
-    const pr = event.target[2].value;
-
-    if(!ts || !qt || !pr){
-    // todo: Notification of faliure
-      alert("Empty field not allowed");
-      return;
-    }
-
-    //todo: GetId will not work after delete
-    const getId = () => {
-      return getGlobal.length + 1
-    }
-
-    const newData = {
-      "id": getId,
-      "tickerSymbol" : ts,
-      "quantity": qt,
-      "price": pr
-    };
-
-    setGlobal(getGlobal.concat([newData]));
-
-    // todo: Notification of success
-    setStockTickerSymbol("");
-    setStockPrice("");
-    setStockQuantity("");
-  }
-
-  // getGlobal.map((a) => console.log(a));
   return (
     <div>
-      {getGlobal.map((stock) => (
-        <p key={stock.id}>
-          Name: {stock.tickerSymbol} <br />
-          Quantity: {stock.quantity} <br />
-          Price: {stock.price} <br />
-        </p>
-      ))}
+      <div>
+        {/* Render Stock Info*/}
+        <RenderStock getGlobal={getGlobal} />
+      </div>
+
       <div>
 
-      <form onSubmit={handleSubmit}>
-
-        {/*Ticker Symbol*/}
-        <input
-          type="text"
-          value={stockTickerSymbol}
-          onChange={handleStockTickerSymbol}
-          placeholder="Ticker Symbol"
+        {/* Render Input Field*/}
+        <InputField
+          stockTickerSymbol={stockTickerSymbol}
+          setStockTickerSymbol={setStockTickerSymbol}
+          stockPrice={stockPrice}
+          setStockPrice={setStockPrice}
+          stockQuantity={stockQuantity}
+          setStockQuantity={setStockQuantity}
+          getGlobal={getGlobal}
+          setGlobal={setGlobal}
         />
-
-        {/*Stock Quantity*/}
-        <input
-          type="number"
-          value = {stockQuantity}
-          onChange={handleStockQuantity}
-          placeholder="Quantity"
-        />
-
-        {/*Stock Price*/}
-        <input
-          type="text"
-          value = {stockPrice}
-          onChange={handleStockPrice}
-          placeholder="Price"
-        />
-
-        <input type="submit" />
-      </form>
-    </div>
+      </div>
     </div>
   );
 };
