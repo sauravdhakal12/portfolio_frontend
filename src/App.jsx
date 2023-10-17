@@ -1,11 +1,35 @@
 import { useState } from "react";
 
-const global = [];
+const StockInfo = ({stock}) => {
+  return (
+    <li key={stock.id}>{stock.name}</li>
+  )
+}
 
 const App = () => {
   const [stockTickerSymbol, setStockTickerSymbol] = useState("");
   const [stockQuantity, setStockQuantity] = useState("");
   const [stockPrice, setStockPrice] = useState("");
+  const [getGlobal, setGlobal] = useState([
+    {
+      "id": 1,
+      "tickerSymbol": "NABIL",
+      "quantity": 12,
+      "price": "780",
+    },
+    {
+      "id": 2,
+      "tickerSymbol": "NICA",
+      "quantity": 20,
+      "price": "680",
+    },
+    {
+      "id": 3,
+      "tickerSymbol": "API",
+      "quantity": 40,
+      "price": "269",
+    }
+  ]);
 
   // Allow input field to be updated
   const handleStockTickerSymbol = (event) => {
@@ -32,13 +56,19 @@ const App = () => {
       return;
     }
 
+    //todo: GetId will not work after delete
+    const getId = () => {
+      return getGlobal.length + 1
+    }
+
     const newData = {
+      "id": getId,
       "tickerSymbol" : ts,
       "quantity": qt,
       "price": pr
     };
 
-    global.push(newData);
+    setGlobal(getGlobal.concat([newData]));
 
     // todo: Notification of success
     setStockTickerSymbol("");
@@ -46,8 +76,18 @@ const App = () => {
     setStockQuantity("");
   }
 
+  // getGlobal.map((a) => console.log(a));
   return (
     <div>
+      {getGlobal.map((stock) => (
+        <p key={stock.id}>
+          Name: {stock.tickerSymbol} <br />
+          Quantity: {stock.quantity} <br />
+          Price: {stock.price} <br />
+        </p>
+      ))}
+      <div>
+
       <form onSubmit={handleSubmit}>
 
         {/*Ticker Symbol*/}
@@ -76,6 +116,7 @@ const App = () => {
 
         <input type="submit" />
       </form>
+    </div>
     </div>
   );
 };
