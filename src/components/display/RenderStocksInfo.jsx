@@ -15,14 +15,6 @@ const RenderStocks = ({
     setGlobal(newList);
   };
 
-  const editStock = (id) => {
-    const selectedStock = getGlobal[id - 1];
-    setStockTickerSymbol(selectedStock["tickerSymbol"]);
-    setStockQuantity(selectedStock["quantity"]);
-    setStockPrice(selectedStock["price"]);
-    setCurrentScreen("Insert");
-  }
-
   return(
     <div id="render-stocks">
       <HeaderSection heading={"My Stocks"} />
@@ -32,7 +24,7 @@ const RenderStocks = ({
           Name: {stock.tickerSymbol} <br />
           Quantity: {stock.quantity} <br />
           Price: {stock.price} <br />
-          <button onClick={() => editStock(stock.id)}>Edit</button>
+          <button onClick={() => removeStock(stock.id)}>Remove</button>
         </p>
       ))}
     </div>

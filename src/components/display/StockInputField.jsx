@@ -34,7 +34,7 @@ const InputField = ({
 
     //todo: GetId will not work after delete
     const getId = () => {
-      return getGlobal.length + 1
+      return getGlobal[getGlobal.length - 1]["id"] + 1;
     }
 
     const newData = {
