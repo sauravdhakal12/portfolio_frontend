@@ -1,11 +1,13 @@
 import { useState } from "react";
-import InputField from "./components/input_field"
-import RenderStock from "./components/render_stock"
+import InputField from "./components/input_field";
+import RenderStock from "./components/render_stock";
+import Menu from "./components/menu";
 
 const App = () => {
   const [stockTickerSymbol, setStockTickerSymbol] = useState("");
   const [stockQuantity, setStockQuantity] = useState("");
   const [stockPrice, setStockPrice] = useState("");
+  const [currentScreen, setCurrentScreen] = useState("Home");
   const [getGlobal, setGlobal] = useState([
     {
       "id": 1,
@@ -27,16 +29,18 @@ const App = () => {
     }
   ]);
 
-  return (
-    <div>
-      <div>
-        {/* Render Stock Info*/}
+  // todo: refactor into its own file
+  // Returns the screen to be rendered
+  const displayScreen = () => {
+    if (currentScreen === "Home") {
+      return (
+        // Render Stock Info
         <RenderStock getGlobal={getGlobal} />
-      </div>
-
-      <div>
-
-        {/* Render Input Field*/}
+      )
+    }
+    else if (currentScreen === "Insert") {
+      return (
+        // Render Input Field
         <InputField
           stockTickerSymbol={stockTickerSymbol}
           setStockTickerSymbol={setStockTickerSymbol}
@@ -47,7 +51,19 @@ const App = () => {
           getGlobal={getGlobal}
           setGlobal={setGlobal}
         />
+      )
+    }
+  }
+
+  return (
+    <div>
+      <div>
+        <Menu currentScreen={currentScreen} setCurrentScreen={setCurrentScreen}/>
       </div>
+      <div>
+        {displayScreen()}
+      </div>
+
     </div>
   );
 };
