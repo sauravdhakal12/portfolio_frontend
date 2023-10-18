@@ -1,7 +1,7 @@
 import { useState } from "react";
-import InputField from "./components/input_field";
-import RenderStock from "./components/render_stock";
-import Menu from "./components/menu";
+import InputField from "./components/display/StockInputField";
+import RenderStock from "./components/display/RenderStocksInfo";
+import Menu from "./components/NavigationMenuSection";
 
 const App = () => {
   const [stockTickerSymbol, setStockTickerSymbol] = useState("");

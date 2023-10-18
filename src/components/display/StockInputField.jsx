@@ -1,4 +1,4 @@
-import HeaderSection from "./header_section";
+import HeaderSection from "../HeaderSection";
 
 const InputField = ({
   stockTickerSymbol, setStockTickerSymbol,
