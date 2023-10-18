@@ -36,7 +36,7 @@ const InputField = ({
     }
 
     const newData = {
-      "id": getId,
+      "id": getId(),
       "tickerSymbol" : ts,
       "quantity": qt,
       "price": pr
