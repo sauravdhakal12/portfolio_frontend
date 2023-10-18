@@ -37,7 +37,10 @@ const App = () => {
     if (currentScreen === "Home") {
       return (
         // Render Stock Info
-        <RenderStock getGlobal={getGlobal} />
+        <RenderStock
+          getGlobal={getGlobal}
+          setGlobal={setGlobal}
+        />
       )
     }
     else if (currentScreen === "Insert") {
@@ -58,11 +61,11 @@ const App = () => {
   }
 
   return (
-    <div>
-      <div>
+    <div id="main-div">
+      <div id="nav-menu-outer">
         <Menu currentScreen={currentScreen} setCurrentScreen={setCurrentScreen}/>
       </div>
-      <div>
+      <div id="display-screen-outer">
         {displayScreen()}
       </div>
 

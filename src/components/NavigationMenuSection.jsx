@@ -16,7 +16,7 @@ const Menu = ({currentScreen, setCurrentScreen}) => {
   }
 
   return (
-    <div>
+    <div id="nav-menu-inner">
       {menu_items_name.map((item, i) => (
         createMenuItem(item, i)
       ))}

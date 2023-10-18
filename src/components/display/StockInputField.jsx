@@ -4,7 +4,7 @@ const InputField = ({
   stockTickerSymbol, setStockTickerSymbol,
   stockQuantity, setStockQuantity,
   stockPrice, setStockPrice,
-  getGlobal, setGlobal
+  getGlobal, setGlobal,
 }) => {
 
   // Allow input field to be updated
@@ -53,7 +53,7 @@ const InputField = ({
   }
 
   return (
-    <div>
+    <div id="stocks-input-field">
       <HeaderSection heading={"Add a new Stock"} />
 
       <form onSubmit={handleSubmit}>
@@ -82,7 +82,7 @@ const InputField = ({
           placeholder="Price"
         />
 
-        <input type="submit" />
+        <input type="submit" value="Add"/>
       </form>
     </div>
   )

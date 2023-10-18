@@ -1,6 +1,6 @@
 const HeaderSection = ({heading}) => {
   return (
-    <div>
+    <div id="header-section-outer">
       <h1>{heading}</h1>
       <hr />
     </div>
