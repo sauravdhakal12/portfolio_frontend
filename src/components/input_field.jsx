@@ -1,3 +1,5 @@
+import HeaderSection from "./header_section";
+
 const InputField = ({
   stockTickerSymbol, setStockTickerSymbol,
   stockQuantity, setStockQuantity,
@@ -51,34 +53,38 @@ const InputField = ({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      <HeaderSection heading={"Add a new Stock"} />
 
-      {/*Ticker Symbol*/}
-      <input
-        type="text"
-        value={stockTickerSymbol}
-        onChange={handleStockTickerSymbol}
-        placeholder="Ticker Symbol"
-      />
+      <form onSubmit={handleSubmit}>
 
-      {/*Stock Quantity*/}
-      <input
-        type="number"
-        value = {stockQuantity}
-        onChange={handleStockQuantity}
-        placeholder="Quantity"
-      />
+        {/*Ticker Symbol*/}
+        <input
+          type="text"
+          value={stockTickerSymbol}
+          onChange={handleStockTickerSymbol}
+          placeholder="Ticker Symbol"
+        />
 
-      {/*Stock Price*/}
-      <input
-        type="text"
-        value = {stockPrice}
-        onChange={handleStockPrice}
-        placeholder="Price"
-      />
+        {/*Stock Quantity*/}
+        <input
+          type="number"
+          value = {stockQuantity}
+          onChange={handleStockQuantity}
+          placeholder="Quantity"
+        />
 
-      <input type="submit" />
-    </form>
+        {/*Stock Price*/}
+        <input
+          type="text"
+          value = {stockPrice}
+          onChange={handleStockPrice}
+          placeholder="Price"
+        />
+
+        <input type="submit" />
+      </form>
+    </div>
   )
 }
 
