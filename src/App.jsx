@@ -29,6 +29,8 @@ const App = () => {
     }
   ]);
 
+  const screen_names = ["Home", "Insert"];
+
   // todo: refactor into its own file
   // Returns the screen to be rendered
   const displayScreen = () => {
