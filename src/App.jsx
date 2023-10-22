@@ -2,34 +2,17 @@ import { useState } from "react";
 import InputField from "./components/display/StockInputField";
 import RenderStock from "./components/display/RenderStocksInfo";
 import Menu from "./components/NavigationMenuSection";
+import { fetchAll } from "./services/Services";
 
 const App = () => {
   const [stockTickerSymbol, setStockTickerSymbol] = useState("");
   const [stockQuantity, setStockQuantity] = useState("");
   const [stockPrice, setStockPrice] = useState("");
   const [currentScreen, setCurrentScreen] = useState("Home");
-  const [getGlobal, setGlobal] = useState([
-    {
-      "id": 1,
-      "tickerSymbol": "NABIL",
-      "quantity": 12,
-      "price": "780",
-    },
-    {
-      "id": 2,
-      "tickerSymbol": "NICA",
-      "quantity": 20,
-      "price": "680",
-    },
-    {
-      "id": 3,
-      "tickerSymbol": "API",
-      "quantity": 40,
-      "price": "269",
-    }
-  ]);
+  const [getGlobal, setGlobal] = useState([]);
 
-  const screen_names = ["Home", "Insert"];
+  // Fetch data from server
+  fetchAll().then((res) => setGlobal(res));
 
   // todo: refactor into its own file
   // Returns the screen to be rendered
