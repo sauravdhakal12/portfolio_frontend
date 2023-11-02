@@ -1,10 +1,11 @@
 import HeaderSection from "../HeaderSection";
+import { addStock } from "../../services/Services";
 
 const InputField = ({
   stockTickerSymbol, setStockTickerSymbol,
   stockQuantity, setStockQuantity,
   stockPrice, setStockPrice,
-  getGlobal, setGlobal,
+  // getGlobal, setGlobal,
 }) => {
 
   // Allow input field to be updated
@@ -33,18 +34,19 @@ const InputField = ({
     }
 
     //todo: GetId will not work after delete
-    const getId = () => {
-      return getGlobal[getGlobal.length - 1]["id"] + 1;
-    }
+    // const getId = () => {
+    //   return getGlobal[getGlobal.length - 1]["id"] + 1;
+    // }
 
     const newData = {
-      "id": getId(),
+      // "id": getId(),
       "tickerSymbol" : ts,
-      "quantity": qt,
-      "price": pr
+      "price": pr,
+      "quantity": qt
     };
 
-    setGlobal(getGlobal.concat([newData]));
+    addStock(newData);
+    // setGlobal(getGlobal.concat([newData]));
 
     // todo: Notification of success
     setStockTickerSymbol("");
