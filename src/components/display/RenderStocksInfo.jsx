@@ -1,18 +1,20 @@
 import HeaderSection from "../HeaderSection";
+import { removeStock } from "../../services/Services";
 
 const RenderStocks = ({
   getGlobal,
-  setGlobal,
+  // setGlobal,
 }) => {
 
-  const removeStock = (id) => {
-    const newList = [];
+  const removeStockHandler = (id) => {
+    // const newList = [];
 
-    getGlobal.forEach((stock) => {
-      if (stock.id !== id) newList.push(stock);
-    });
+    // getGlobal.forEach((stock) => {
+    //   if (stock.id !== id) newList.push(stock);
+    // });
 
-    setGlobal(newList);
+    // setGlobal(newList);
+    removeStock(id);
   };
 
   return(
@@ -24,7 +26,7 @@ const RenderStocks = ({
           Name: {stock.tickerSymbol} <br />
           Quantity: {stock.quantity} <br />
           Price: {stock.price} <br />
-          <button onClick={() => removeStock(stock.id)}>Remove</button>
+          <button onClick={() => removeStockHandler(stock.id)}>Remove</button>
         </p>
       ))}
     </div>

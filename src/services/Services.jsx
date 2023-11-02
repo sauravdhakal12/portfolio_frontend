@@ -10,4 +10,8 @@ const addStock = (newStock) => {
   return axios.post(baseUrl + "api/stocks", newStock).then((res) => res.data);
 };
 
-export { fetchAll, addStock };
+const removeStock = (stockId) => {
+  return axios.delete(baseUrl + "api/stocks/" + stockId).then((res) => res.data);
+}
+
+export { fetchAll, addStock, removeStock};
