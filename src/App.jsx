@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputField from "./components/display/StockInputField";
 import RenderStock from "./components/display/RenderStocksInfo";
 import Menu from "./components/NavigationMenuSection";
@@ -12,7 +12,9 @@ const App = () => {
   const [getGlobal, setGlobal] = useState([]);
 
   // Fetch data from server
-  fetchAll().then((res) => setGlobal(res));
+  useEffect(() => {
+    fetchAll().then((res) => setGlobal(res));
+  }, []);
 
   // todo: refactor into its own file
   // Returns the screen to be rendered
