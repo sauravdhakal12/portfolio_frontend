@@ -1,11 +1,13 @@
 import HeaderSection from "../HeaderSection";
 import { addStock } from "../../services/Services";
+import notifiy from "../../utils/notification";
 
 const InputField = ({
   stockTickerSymbol, setStockTickerSymbol,
   stockQuantity, setStockQuantity,
   stockPrice, setStockPrice,
-  // getGlobal, setGlobal,
+  getGlobal, setGlobal,
+  displayMessage,
 }) => {
 
   // Allow input field to be updated
@@ -21,34 +23,39 @@ const InputField = ({
     setStockPrice(event.target.value);
   }
 
-  const handleSubmit = (event) => {
+  // When the form gets submitted
+  const handleSubmit = async (event) => {
+
     event.preventDefault();
     const ts = event.target[0].value;
     const qt = event.target[1].value;
     const pr = event.target[2].value;
 
-    if(!ts || !qt || !pr){
-    // todo: Notification of faliure
-      alert("Empty field not allowed");
+    // Make sure fields are non empty
+    if (!ts || !qt || !pr) {
+      notifiy("Empty fields not allowed", displayMessage);
       return;
     }
 
-    //todo: GetId will not work after delete
-    // const getId = () => {
-    //   return getGlobal[getGlobal.length - 1]["id"] + 1;
-    // }
-
+    // Create object for stock to be added
     const newData = {
-      // "id": getId(),
-      "tickerSymbol" : ts,
+      "tickerSymbol": ts,
       "price": pr,
       "quantity": qt
     };
 
-    addStock(newData);
-    // setGlobal(getGlobal.concat([newData]));
+    // Try to add
+    const res = await addStock(newData);
 
-    // todo: Notification of success
+    if (res["error"]) {
+      notifiy("Unknown error occured", displayMessage);
+      return;
+    }
+
+    // If success, update getGlobal
+    setGlobal(getGlobal.concat([res]));
+
+    notifiy(`Added entry: ${res.tickerSymbol}`, displayMessage);
     setStockTickerSymbol("");
     setStockPrice("");
     setStockQuantity("");
@@ -71,7 +78,7 @@ const InputField = ({
         {/*Stock Quantity*/}
         <input
           type="number"
-          value = {stockQuantity}
+          value={stockQuantity}
           onChange={handleStockQuantity}
           placeholder="Quantity"
         />
@@ -79,12 +86,12 @@ const InputField = ({
         {/*Stock Price*/}
         <input
           type="text"
-          value = {stockPrice}
+          value={stockPrice}
           onChange={handleStockPrice}
           placeholder="Price"
         />
 
-        <input type="submit" value="Add"/>
+        <input type="submit" value="Add" />
       </form>
     </div>
   )
