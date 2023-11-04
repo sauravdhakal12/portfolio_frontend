@@ -1,23 +1,32 @@
 import HeaderSection from "../HeaderSection";
 import { removeStock } from "../../services/Services";
+import notifiy from "../../utils/notification";
 
 const RenderStocks = ({
   getGlobal,
-  // setGlobal,
+  setGlobal,
+  displayMessage,
 }) => {
 
-  const removeStockHandler = (id) => {
-    // const newList = [];
+  const removeStockHandler = async (id) => {
+    const res = await removeStock(id);
 
-    // getGlobal.forEach((stock) => {
-    //   if (stock.id !== id) newList.push(stock);
-    // });
+    if (!res) {
+      notifiy("Error: Item doesn't exsit", displayMessage, "error");
+    }
+    else {
+      const newList = [];
 
-    // setGlobal(newList);
-    removeStock(id);
+      getGlobal.forEach((stock) => {
+        if (stock.id !== id) newList.push(stock);
+      });
+
+      setGlobal(newList);
+      notifiy(`Item: ${res.tickerSymbol} successfully removed`, displayMessage, "success");
+    }
   };
 
-  return(
+  return (
     <div id="render-stocks">
       <HeaderSection heading={"My Stocks"} />
 

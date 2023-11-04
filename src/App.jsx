@@ -12,7 +12,7 @@ const App = () => {
   const [stockPrice, setStockPrice] = useState("");
   const [currentScreen, setCurrentScreen] = useState("Home");
   const [getGlobal, setGlobal] = useState([]);
-  const [displayMessage, setdisplayMessage] = useState("");
+  const [displayMessage, setdisplayMessage] = useState(["", ""]);
 
   // Fetch data from server
   useEffect(() => {
@@ -28,6 +28,7 @@ const App = () => {
         <RenderStock
           getGlobal={getGlobal}
           setGlobal={setGlobal}
+          displayMessage={setdisplayMessage}
         />
       )
     }
@@ -52,7 +53,7 @@ const App = () => {
   return (
     <div id="main-div">
       <div id="nav-menu-outer">
-        <Menu currentScreen={currentScreen} setCurrentScreen={setCurrentScreen}/>
+        <Menu currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />
       </div>
       <div id="display-screen-outer">
         <Notification message={displayMessage} />
