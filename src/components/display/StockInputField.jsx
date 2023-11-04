@@ -33,7 +33,7 @@ const InputField = ({
 
     // Make sure fields are non empty
     if (!ts || !qt || !pr) {
-      notifiy("Empty fields not allowed", displayMessage);
+      notifiy("Empty fields not allowed", displayMessage, "error");
       return;
     }
 
@@ -48,14 +48,14 @@ const InputField = ({
     const res = await addStock(newData);
 
     if (res["error"]) {
-      notifiy("Unknown error occured", displayMessage);
+      notifiy("Unknown error occured", displayMessage, "error");
       return;
     }
 
     // If success, update getGlobal
     setGlobal(getGlobal.concat([res]));
 
-    notifiy(`Added entry: ${res.tickerSymbol}`, displayMessage);
+    notifiy(`Added entry: ${res.tickerSymbol}`, displayMessage, "success");
     setStockTickerSymbol("");
     setStockPrice("");
     setStockQuantity("");
