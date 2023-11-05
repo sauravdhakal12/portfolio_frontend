@@ -12,9 +12,9 @@ const RenderStocks = ({
     const res = await removeStock(id);
 
     if (!res) {
-      notifiy("Error: Item doesn't exsit", displayMessage, "error");
+      notifiy("Error: Item doesn't exist", displayMessage, "error");
+      return;
     }
-    else {
       const newList = [];
 
       getGlobal.forEach((stock) => {
@@ -23,7 +23,6 @@ const RenderStocks = ({
 
       setGlobal(newList);
       notifiy(`Item: ${res.tickerSymbol} successfully removed`, displayMessage, "success");
-    }
   };
 
   return (
