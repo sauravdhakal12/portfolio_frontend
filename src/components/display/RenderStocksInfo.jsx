@@ -8,21 +8,30 @@ const RenderStocks = ({
   displayMessage,
 }) => {
 
-  const removeStockHandler = async (id) => {
-    const res = await removeStock(id);
+  const removeStockHandler = async (stock) => {
+    // Confirm deletion
+    const ans = confirm(`Delete ${stock.tickerSymbol}`);
+    if (!ans) {
+      return;
+    }
 
+    // Request to remove
+    const res = await removeStock(stock.id);
+
+    // If returns null, item doesn't exist
     if (!res) {
       notifiy("Error: Item doesn't exist", displayMessage, "error");
       return;
     }
-      const newList = [];
 
-      getGlobal.forEach((stock) => {
-        if (stock.id !== id) newList.push(stock);
-      });
-
-      setGlobal(newList);
-      notifiy(`Item: ${res.tickerSymbol} successfully removed`, displayMessage, "success");
+    // Else, update state variable
+    const newList = [];
+    getGlobal.forEach((stocks) => {
+      if (stocks.id !== stock.id) newList.push(stocks);
+    });
+    setGlobal(newList);
+    
+    notifiy(`Item: ${res.tickerSymbol} successfully removed`, displayMessage, "success");
   };
 
   return (
@@ -34,7 +43,7 @@ const RenderStocks = ({
           Name: {stock.tickerSymbol} <br />
           Quantity: {stock.quantity} <br />
           Price: {stock.price} <br />
-          <button onClick={() => removeStockHandler(stock.id)}>Remove</button>
+          <button onClick={() => removeStockHandler(stock)}>Remove</button>
         </p>
       ))}
     </div>
